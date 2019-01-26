@@ -25,14 +25,11 @@ public class Pick extends Task {
         if(!onionFarmArea.contains(ctx.players.local()) && currentFloor != 0) {
             System.out.println("Climbing down stairs to farm");
             climbDownStairs();
-
         } else if(!onionFarmArea.contains(ctx.players.local()) && currentFloor == 0) {
             System.out.println("Walking to farm");
             walkToFarm();
         } else if(onionFarmArea.contains(ctx.players.local())) {
-
             boolean closedGate = onionFarmArea.contains(ctx.objects.select().id(gateClosedObjectID).nearest().poll());
-
             if(closedGate) {
                 System.out.println("Opening closed gate");
                 openGate();
@@ -41,6 +38,12 @@ public class Pick extends Task {
                 pickOnions();
             }
         }
+    }
+
+    //Used to keep track of current task in paint
+    @Override
+    public String toString() {
+        return "Picking Onions";
     }
 
     //climb stairs to the bank
@@ -83,7 +86,6 @@ public class Pick extends Task {
     }
 
     //Pick onions from farm
-    @SuppressWarnings("Duplicates")
     private void pickOnions() {
         GameObject onionToPick = ctx.objects.select().id(onionObjectID).nearest().poll();
         if(onionToPick.inViewport()) {

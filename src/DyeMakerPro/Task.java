@@ -42,12 +42,6 @@ public abstract class Task extends ClientAccessor {
         super(ctx);
     }
 
-    protected boolean hasFullInventory() {
-        //returns true if inventory is full, otherwise false
-        return ctx.inventory.select().count() == 28;
-    }
-
-
     public abstract boolean activate();
     public abstract void execute();
 

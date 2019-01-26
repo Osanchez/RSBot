@@ -46,8 +46,13 @@ public class Bank extends Task {
                 System.out.println("Banking Onions");
                 depositOnions();
             }
-
         }
+    }
+
+    //Used to keep track of current task in paint
+    @Override
+    public String toString() {
+        return "Banking";
     }
 
     //open gate to farm if onions are not reachable
@@ -89,7 +94,6 @@ public class Bank extends Task {
     }
 
     //deposit onions into bank account
-    @SuppressWarnings("Duplicates")
     private void depositOnions() {
         if(ctx.depositBox.opened()) {
             if(ctx.depositBox.depositInventory()) {

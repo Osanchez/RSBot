@@ -7,10 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
-import DyeMakerPro.Task;
 import DyeMakerPro.tasks.*;
 
 @Script.Manifest(
@@ -24,6 +21,8 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
     private int numOnionsPicked=0;
     private int numDyesCreated=0;
 
+    public String taskName = "";
+
     private List<Task> taskList = new ArrayList<Task>();
     private Task pickTask;
     private Task createTask;
@@ -33,7 +32,7 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
     public void start() {
         System.out.println("DyeMakerPro starting.");
         String userOptions[] = {"Collect Onions", "Create Dye"};
-        String userChoice = ""+(String)JOptionPane.showInputDialog(null, "Collect onions or Create Yellow Dye?", "feature", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
+        String userChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or Create Yellow Dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
 
         //banking tasks
         this.bankTask = new Bank(ctx);
@@ -52,8 +51,11 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
 
     @Override
     public void stop() {
-        System.out.println("AlKharidFishNCook stopping.");
+        System.out.println("DyeMakerPro stopping.");
     }
+
+    private static final Font TAHOMA = new Font("Tahoma", Font.PLAIN, 12);
+
 
     @Override
     public void repaint(Graphics graphics) {
@@ -63,14 +65,15 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
         long hours = (milliseconds / (1000*60*60)) % 24;
 
         Graphics2D g = (Graphics2D)graphics;
+        g.setFont(TAHOMA);
         g.setColor(new Color(255, 107, 107, 180));
-        g.fillRect(200, 0, 170, 130);
+        g.fillRect(200, 0, 170, 120);
         g.setColor(new Color(255, 45, 45));
-        g.drawRect(200, 0, 170, 130);
+        g.drawRect(200, 0, 170, 120);
         g.setColor(new Color(255, 255, 255));
         g.drawString("DyeMakerPro", 210, 20);
         g.drawString("Run time: " + String.format("%02d:%02d:%02d", hours, minutes, seconds), 210, 40);
-        g.drawString("Task: ",210, 60);
+        g.drawString("Task: " + taskName,210, 60);
         g.drawString("Collected/Created: " + numOnionsPicked + "/" + numDyesCreated, 210, 80);
     }
 
@@ -80,6 +83,7 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
             for (Task task : taskList) {
                 if (task.activate()) {
                     Condition.sleep(Random.nextInt(100,1500));
+                    taskName = task.toString();
                     task.execute();
                     break;
                 }
