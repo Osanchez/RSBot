@@ -7,10 +7,10 @@ import org.powerbot.script.rt4.GameObject;
 
 import java.util.concurrent.Callable;
 
-public class Bank extends Task {
+public class BankOnions extends Task {
 
 
-    public Bank(ClientContext ctx) {
+    public BankOnions(ClientContext ctx) {
         super(ctx);
     }
 
@@ -52,7 +52,7 @@ public class Bank extends Task {
     //Used to keep track of current task in paint
     @Override
     public String toString() {
-        return "Banking";
+        return "Banking Onions";
     }
 
     //open gate to farm if onions are not reachable

@@ -26,7 +26,8 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
     private List<Task> taskList = new ArrayList<Task>();
     private Task pickTask;
     private Task createTask;
-    private Task bankTask;
+    private Task bankOnionsTask;
+    private Task bankDyeTask;
 
     @Override
     public void start() {
@@ -34,18 +35,17 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
         String userOptions[] = {"Collect Onions", "Create Dye"};
         String userChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or Create Yellow Dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
 
-        //banking tasks
-        this.bankTask = new Bank(ctx);
-
-        //creating dye tasks
-        taskList.add(bankTask);
-
         if (userChoice.equals("Collect Onions")) {
             this.pickTask = new Pick(ctx);
+            this.bankOnionsTask = new BankOnions(ctx);
+
             taskList.add(pickTask);
+            taskList.add(bankOnionsTask);
         } else {
             this.createTask = new Create(ctx);
+            this.bankDyeTask = new BankDye(ctx);
             taskList.add(createTask);
+            taskList.add(bankDyeTask);
         }
     }
 
@@ -82,7 +82,7 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
         if (ctx.players.local().animation() == -1) {
             for (Task task : taskList) {
                 if (task.activate()) {
-                    Condition.sleep(Random.nextInt(100,1500));
+                    Condition.sleep(Random.nextInt(100,1200)); //random sleep between tasks
                     taskName = task.toString();
                     task.execute();
                     break;
