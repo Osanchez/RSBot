@@ -29,21 +29,35 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
     private Task bankOnionsTask;
     private Task bankDyeTask;
 
+    private String dyeChoice;
+
     @Override
     public void start() {
         System.out.println("DyeMakerPro starting.");
-        String userOptions[] = {"Collect Onions", "Create Dye"};
-        String userChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or Create Yellow Dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
+        String userOptions[] = {"Collect Ingredients", "Create Dye"};
+        String dyeOptions[] = {"Red Dye", "Yellow Dye", "Blue Dye"};
+        String taskChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or create dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
+        if (taskChoice.equals("Create Dye")) {
+            dyeChoice = "" + JOptionPane.showInputDialog(null, "What color dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, dyeOptions, dyeOptions[0]);
+        }
 
-        if (userChoice.equals("Collect Onions")) {
+
+
+        if (taskChoice.equals("Collect Ingredients")) { //collect ingredient
             this.pickTask = new Pick(ctx);
             this.bankOnionsTask = new BankOnions(ctx);
 
             taskList.add(pickTask);
             taskList.add(bankOnionsTask);
-        } else {
+        } else {                                   //create dyes
             this.createTask = new Create(ctx);
             this.bankDyeTask = new BankDye(ctx);
+
+            //set user option variables - don't believe I need to make the changes twice
+            this.createTask.setUserOptions(dyeChoice);
+            this.bankDyeTask.setUserOptions(dyeChoice);
+
+            //add tasks to list
             taskList.add(createTask);
             taskList.add(bankDyeTask);
         }

@@ -7,6 +7,9 @@ import org.powerbot.script.rt4.ClientContext;
 
 public abstract class Task extends ClientAccessor {
 
+    //magic numbers
+    protected final static int goldRequired = 5;
+
     //animation ids
     protected final static int pickingAnimation = 827;
 
@@ -15,12 +18,21 @@ public abstract class Task extends ClientAccessor {
     protected final static int depositBoxID = 6948; //interact "Deposit"
     protected final static int closedDoorID = 1535;
     protected final static int onionObjectID = 3366;
+    protected final static int redBerryObjectID = 1234; //fill in
+    protected final static int woadLeafObjectID = 5678; //fill in
 
+
+    protected final static int goldID = 995;
 
     //item ids
     protected final static int onionID = 1957;
-    protected final static int goldID = 995;
+    protected final static int redBerryID = 1951;
+    protected final static int woadLeafID = 1793;
+
+    //dyes
     protected final static int yellowdyeID = 1765;
+    protected final static int bluedyeID = 1767;
+    protected final static int reddyeID = 1763;
 
 
     //nps ids
@@ -51,17 +63,47 @@ public abstract class Task extends ClientAccessor {
     };
 
     //areas
-    //Onion Farm
     protected static final Area onionFarmArea = new Area (
             new Tile(3183, 3275, 0),
             new Tile(3192, 3264, 0)
     );
 
-    //Aggies House
     protected static final Area aggieWitchHouseArea = new Area (
             new Tile(3095, 3264, 0),
             new Tile(3083, 3256, 0)
     );
+
+    //selected user options
+    protected int dyeID;
+    protected int ingredientItemID;
+    protected int ingredientObjectID;
+    protected int amountRequired;
+
+
+    //used to set correct variables
+    void setUserOptions(String dyeOption) {
+        switch (dyeOption) {
+            case "Red Dye":            //red dye
+                dyeID = reddyeID;
+                ingredientItemID = redBerryID;
+                ingredientObjectID = redBerryObjectID;
+                amountRequired = 3;
+                break;
+            case "Yellow Dye":  //yellow dye
+                dyeID = yellowdyeID;
+                ingredientItemID = onionID;
+                ingredientObjectID = onionObjectID;
+                amountRequired = 2;
+                break;
+            default:                                     //blue dye
+                dyeID = bluedyeID;
+                ingredientItemID = woadLeafID;
+                ingredientObjectID = woadLeafObjectID;
+                amountRequired = 2;
+                break;
+        }
+    }
+
 
     public Task(ClientContext ctx) {
         super(ctx);

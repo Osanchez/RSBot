@@ -4,7 +4,9 @@ import DyeMakerPro.Task;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.*;
 
-import java.util.concurrent.Callable;
+//TODO: Woad leaves are stackable so the bot needs to recognize that there are enough ingredients to create dyes
+//TODO: More work on opening the door to Aggie's
+
 
 public class Create extends Task {
 
@@ -14,7 +16,8 @@ public class Create extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.select().id(onionID).count() >= 2 && ctx.inventory.select().id(goldID).count(true) >= 5;
+        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired | ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired
+                && ctx.inventory.select().id(goldID).count(true) >= goldRequired;
     }
 
     @Override
@@ -44,13 +47,19 @@ public class Create extends Task {
         ctx.movement.newTilePath(pathToBankFromAggie).reverse().traverse();
     }
 
+    @SuppressWarnings("Duplicated")
     private void openDoor() {
         final int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
         GameObject closedDoor = ctx.objects.select().id(closedDoorID).nearest().poll();
         closedDoor.bounds(closedDoorBounds);
 
         if(closedDoor.inViewport()) {
-            closedDoor.interact("Open", "Door");
+            System.out.println("Opening door.");
+            if(ctx.inventory.selectedItemIndex() == -1) { //ensures that no item is selected when interacting with door
+                closedDoor.interact("Open", "Door");
+            } else { //if item is selected unselect the item
+                closedDoor.interact("Use", "Door");
+            }
         } else {
             System.out.println("Turning camera to door.");
             ctx.camera.turnTo(closedDoor);
@@ -59,20 +68,15 @@ public class Create extends Task {
 
     private void createDyes() {
         Npc aggieWitch = ctx.npcs.select().id(aggieWitchNPC).nearest().poll();
-        Item randomOnion = ctx.inventory.select().id(onionID).shuffle().poll(); //selects a random onion from inventory
+        Item randomOnion = ctx.inventory.select().id(ingredientItemID).shuffle().poll(); //selects a random onion from inventory
 
         if (ctx.game.tab() == Game.Tab.INVENTORY) { //checks to see if inventory tab is open
             if (ctx.inventory.selectedItemIndex() != -1) {
                 //use onion on aggie and wait for dialogue window
-                System.out.println("Using Onion");
+                System.out.println("Using Ingredient");
                 if(aggieWitch.inViewport()) {
                     aggieWitch.interact("Use");
-                    Condition.wait(new Callable<Boolean>() {
-                        @Override
-                        public Boolean call() {
-                            return ctx.chat.canContinue();
-                        }
-                    }, 100, 30);
+                    Condition.wait(ctx.chat::canContinue, 100, 30);
                     ctx.chat.clickContinue(true);
                 } else {
                     System.out.println("Turning camera to Aggie.");
@@ -81,12 +85,7 @@ public class Create extends Task {
                 }
             } else {
                 randomOnion.interact("Use");
-                Condition.wait(new Callable<Boolean>() {
-                    @Override
-                    public Boolean call() {
-                        return ctx.inventory.selectedItemIndex() != -1;
-                    }
-                }, 100, 30);
+                Condition.wait(() -> ctx.inventory.selectedItemIndex() != -1, 100, 30);
             }
         } else { //open inventory tab
             ctx.game.tab(Game.Tab.INVENTORY);

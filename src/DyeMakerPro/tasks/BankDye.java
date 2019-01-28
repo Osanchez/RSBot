@@ -2,12 +2,10 @@ package DyeMakerPro.tasks;
 
 import DyeMakerPro.Task;
 import org.powerbot.script.Condition;
+import org.powerbot.script.rt4.Bank;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import org.powerbot.script.rt4.Interactive;
 import org.powerbot.script.rt4.Npc;
-
-import java.util.concurrent.Callable;
 
 public class BankDye extends Task {
 
@@ -17,7 +15,7 @@ public class BankDye extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.select().id(onionID).count() < 2 | ctx.inventory.select().id(goldID).count(true) < 5;
+        return ctx.inventory.select().id(ingredientItemID).count() < amountRequired | ctx.inventory.select().id(goldID).count(true) < goldRequired;
     }
 
     @Override
@@ -33,8 +31,12 @@ public class BankDye extends Task {
         }
 
         if(ctx.bank.opened()) {
+            if(!hasIngredients()) {
+                System.out.println("Out of ingredients. Stopping script.");
+                ctx.controller.stop(); //stop script if user has no gold
+            }
             depositDyes();
-            withdrawalOnions();
+            withdrawalIngredient();
         } else {
             if(ctx.bank.inViewport()) {
                 ctx.bank.open();
@@ -57,12 +59,17 @@ public class BankDye extends Task {
 
     @SuppressWarnings("Duplicated")
     private void openDoor() {
-        final int[] closedDoorBounds = {-36, 12, -232, 4, 12, 136}; //was having some issues opening the door so had to set model bounds
-        GameObject closedDoor = ctx.objects.select().id(closedDoorID).each(Interactive.doSetBounds(closedDoorBounds)).nearest().poll();
+        final int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
+        GameObject closedDoor = ctx.objects.select().id(closedDoorID).nearest().poll();
+        closedDoor.bounds(closedDoorBounds);
 
         if(closedDoor.inViewport()) {
             System.out.println("Opening door.");
-            closedDoor.click();
+            if(ctx.inventory.selectedItemIndex() == -1) { //ensures that no item is selected when interacting with door
+                closedDoor.interact("Open", "Door");
+            } else { //if item is selected unselect the item
+                closedDoor.interact("Use", "Door");
+            }
         } else {
             System.out.println("Turning camera to door.");
             ctx.camera.turnTo(closedDoor);
@@ -75,26 +82,20 @@ public class BankDye extends Task {
     }
 
     private void depositDyes() {
-        ctx.bank.deposit(yellowdyeID, 28);
-        Condition.wait(new Callable<Boolean>() {
-            @Override
-            public Boolean call() {
-                return ctx.inventory.select().id(yellowdyeID).count() == 0;
-            }
-        }, 100, 50);
+        ctx.bank.deposit(dyeID, Bank.Amount.ALL);
+        Condition.wait(() -> ctx.inventory.select().id(dyeID).count() == 0, 100, 50);
     }
-    private void withdrawalOnions() {
-        ctx.bank.withdraw(onionID, 26);
-        Condition.wait(new Callable<Boolean>() {
-            @Override
-            public Boolean call() {
-                return ctx.inventory.select().id(onionObjectID).count() > 0;
-            }
-        }, 100, 20);
+    private void withdrawalIngredient() {
+        ctx.bank.withdraw(ingredientItemID, Bank.Amount.ALL);
+        Condition.wait(() -> ctx.inventory.select().id(ingredientItemID).count() > 0, 100, 20);
         ctx.bank.close();
     }
 
     private boolean hasGold() {
-        return ctx.inventory.select().id(goldID).count(true) > 5;
+        return ctx.inventory.select().id(goldID).count(true) >= 5;
+    }
+
+    private boolean hasIngredients() {
+        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired | ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired;
     }
 }
