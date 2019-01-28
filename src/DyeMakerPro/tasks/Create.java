@@ -16,7 +16,7 @@ public class Create extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired | ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired
+        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired K| ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired
                 && ctx.inventory.select().id(goldID).count(true) >= goldRequired;
     }
 
