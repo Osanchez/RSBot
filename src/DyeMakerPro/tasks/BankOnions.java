@@ -80,12 +80,10 @@ public class BankOnions extends Task {
             System.out.println("Stairs are in the area and are in the viewport. attempting to climb stairs");
             final int currentFloor = ctx.players.local().tile().floor();
             stairs.interact("Climb-up");
-            Condition.wait(new Callable<Boolean>() { //sleep until the location floor changes
-                @Override
-                public Boolean call() {
-                    int newFloor = ctx.players.local().tile().floor();
-                    return newFloor != currentFloor;
-                }
+            //sleep until the location floor changes
+            Condition.wait(() -> {
+                int newFloor = ctx.players.local().tile().floor();
+                return newFloor != currentFloor;
             }, 1000, 5);
         } else { //if stairs are in the area and not viewable
             System.out.println("stairs not in viewport. Turning Camera.");
@@ -98,32 +96,18 @@ public class BankOnions extends Task {
         if(ctx.depositBox.opened()) {
             if(ctx.depositBox.depositInventory()) {
                 final int inventoryCount = ctx.inventory.select().count();
-                Condition.wait(new Callable<Boolean>() {
-                    @Override
-                    public Boolean call() {
-                        return ctx.inventory.select().count() != inventoryCount;
-                    }
-                }, 500, 20);
+                Condition.wait(() -> ctx.inventory.select().count() != inventoryCount, 500, 20);
             }
             ctx.depositBox.close();
-            Condition.wait(new Callable<Boolean>() {
-                @Override
-                public Boolean call() {
-                    return !ctx.depositBox.opened();
-                }
-            }, 500, 20);
+            Condition.wait(() -> !ctx.depositBox.opened(), 500, 20);
         } else {
             GameObject depositBox = ctx.objects.select().id(depositBoxID).nearest().poll();
             if(depositBox.inViewport()) {
                 depositBox.interact("Deposit");
-                Condition.wait(new Callable<Boolean>() {
-                    @Override
-                    public Boolean call() {
-                        return ctx.depositBox.opened();
-                    }
-                }, 250, 20);
+                Condition.wait(() -> ctx.depositBox.opened(), 250, 20);
             } else {
                 ctx.camera.turnTo(depositBox);
+                ctx.movement.step(depositBox);
             }
         }
     }
