@@ -103,7 +103,9 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
                 }
             }
         }
-        updateDyesCreated();
+        if(taskName.equals("Creating Dyes")) {
+            updateDyesCreated();
+        }
     }
 
     @Override
