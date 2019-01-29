@@ -51,9 +51,8 @@ public abstract class Task extends ClientAccessor {
     protected final static int[] bankStairs = {16671, 16672, 16673}; //interact "Climb-up"
 
 
-    //paths
-    protected static final Tile[] pathToBankStairs = new Tile[]{
-            new Tile(3185, 3268, 0),
+    /*
+                new Tile(3185, 3268, 0),
             new Tile(3184, 3259, 0),
             new Tile(3188, 3251, 0),
             new Tile(3194, 3241, 0),
@@ -62,6 +61,28 @@ public abstract class Task extends ClientAccessor {
             new Tile(3203, 3214, 0),
             new Tile(3205, 3214, 0),
             new Tile(3205, 3209, 0)
+     */
+
+    //paths
+    protected static final Tile[] pathToBankStairs = new Tile[]{
+            new Tile(3184, 3268, 0),
+            new Tile(3184, 3264, 0),
+            new Tile(3187, 3260, 0),
+            new Tile(3191, 3255, 0),
+            new Tile(3193, 3251, 0),
+            new Tile(3194, 3246, 0),
+            new Tile(3195, 3241, 0),
+            new Tile(3196, 3236, 0),
+            new Tile(3197, 3232, 0),
+            new Tile(3198, 3228, 0),
+            new Tile(3198, 3223, 0),
+            new Tile(3198, 3218, 0),
+            new Tile(3202, 3217, 0),
+            new Tile(3203, 3214, 0),
+            new Tile(3206, 3213, 0),
+            new Tile(3208, 3212, 0),
+            new Tile(3208, 3209, 0),
+            new Tile(3206, 3209, 0)
     };
 
     protected static final Tile[] pathToBankFromAggie = new Tile[]{
