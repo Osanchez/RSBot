@@ -91,12 +91,9 @@ public class Pick extends Task {
         GameObject onionToPick = ctx.objects.select().id(onionObjectID).nearest().poll();
         if(onionToPick.inViewport()) {
             onionToPick.interact("Pick");
-            Condition.wait(new Callable<Boolean>() {
-                @Override
-                public Boolean call() {
-                    final int currentAnimation = ctx.players.local().animation();
-                    return currentAnimation != pickingAnimation;
-                }
+            Condition.wait(() -> {
+                final int currentAnimation = ctx.players.local().animation();
+                return currentAnimation != pickingAnimation;
             }, 600, 10);
         } else {
             System.out.println("Turning camera to onion");

@@ -57,7 +57,7 @@ public abstract class Task extends ClientAccessor {
             new Tile(3184, 3259, 0),
             new Tile(3188, 3251, 0),
             new Tile(3194, 3241, 0),
-            new Tile(3199, 3228, 0),
+            new Tile(3196, 3228, 0),
             new Tile(3199, 3221, 0),
             new Tile(3203, 3214, 0),
             new Tile(3205, 3214, 0),
