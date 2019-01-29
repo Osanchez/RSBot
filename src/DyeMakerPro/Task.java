@@ -7,11 +7,17 @@ import org.powerbot.script.rt4.ClientContext;
 
 public abstract class Task extends ClientAccessor {
 
+    //counter
+    protected int dyesCreated = 0;
+
     //magic numbers
     protected final static int goldRequired = 5;
 
     //animation ids
     protected final static int pickingAnimation = 827;
+
+    //bounds
+    protected final static int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
 
     //object ids
     protected final static int gateClosedObjectID = 12987;

@@ -2,6 +2,7 @@ package DyeMakerPro.tasks;
 
 import DyeMakerPro.Task;
 import org.powerbot.script.Condition;
+import org.powerbot.script.Random;
 import org.powerbot.script.rt4.Bank;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -15,7 +16,8 @@ public class BankDye extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.select().id(ingredientItemID).count() < amountRequired | ctx.inventory.select().id(goldID).count(true) < goldRequired;
+        return (ctx.inventory.select().id(ingredientItemID).count() < amountRequired | ctx.inventory.select().id(goldID).count(true) < goldRequired |
+                ctx.inventory.select().id(dyeID).count() >= 26);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class BankDye extends Task {
                 walkToBank();
             } else {
                 ctx.camera.turnTo(draynorBanker);
+                ctx.camera.pitch(Random.nextInt(60, 100));
             }
         }
     }
@@ -57,9 +60,8 @@ public class BankDye extends Task {
         return "Banking Dyes";
     }
 
-    @SuppressWarnings("Duplicated")
+    @SuppressWarnings("Duplicates")
     private void openDoor() {
-        final int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
         GameObject closedDoor = ctx.objects.select().id(closedDoorID).nearest().poll();
         closedDoor.bounds(closedDoorBounds);
 
@@ -73,6 +75,7 @@ public class BankDye extends Task {
         } else {
             System.out.println("Turning camera to door.");
             ctx.camera.turnTo(closedDoor);
+            ctx.camera.pitch(Random.nextInt(60, 100));
         }
     }
 
@@ -86,16 +89,19 @@ public class BankDye extends Task {
         Condition.wait(() -> ctx.inventory.select().id(dyeID).count() == 0, 100, 50);
     }
     private void withdrawalIngredient() {
-        ctx.bank.withdraw(ingredientItemID, Bank.Amount.ALL);
+        ctx.bank.withdraw(ingredientItemID, 28);
         Condition.wait(() -> ctx.inventory.select().id(ingredientItemID).count() > 0, 100, 20);
         ctx.bank.close();
     }
 
     private boolean hasGold() {
-        return ctx.inventory.select().id(goldID).count(true) >= 5;
+        return ctx.inventory.select().id(goldID).count(true) >= goldRequired;
     }
 
     private boolean hasIngredients() {
-        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired | ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired;
+        return (ctx.bank.select().id(ingredientItemID).count() >= amountRequired |
+                ctx.bank.select().id(ingredientItemID).count(true) >= amountRequired) |
+                (ctx.inventory.select().id(ingredientItemID).count() >= amountRequired |
+                ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired);
     }
 }

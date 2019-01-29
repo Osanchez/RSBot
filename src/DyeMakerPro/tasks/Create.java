@@ -2,6 +2,7 @@ package DyeMakerPro.tasks;
 
 import DyeMakerPro.Task;
 import org.powerbot.script.Condition;
+import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
 
 //TODO: Woad leaves are stackable so the bot needs to recognize that there are enough ingredients to create dyes
@@ -16,8 +17,10 @@ public class Create extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.select().id(ingredientItemID).count() >= amountRequired K| ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired
-                && ctx.inventory.select().id(goldID).count(true) >= goldRequired;
+        return (ctx.inventory.select().id(ingredientItemID).count() >= amountRequired |
+                ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired &&
+                ctx.inventory.select().id(dyeID).count() < 26) &&
+                ctx.inventory.select().id(goldID).count(true) >= goldRequired;
     }
 
     @Override
@@ -47,9 +50,8 @@ public class Create extends Task {
         ctx.movement.newTilePath(pathToBankFromAggie).reverse().traverse();
     }
 
-    @SuppressWarnings("Duplicated")
+    @SuppressWarnings("Duplicates")
     private void openDoor() {
-        final int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
         GameObject closedDoor = ctx.objects.select().id(closedDoorID).nearest().poll();
         closedDoor.bounds(closedDoorBounds);
 
@@ -63,6 +65,7 @@ public class Create extends Task {
         } else {
             System.out.println("Turning camera to door.");
             ctx.camera.turnTo(closedDoor);
+            ctx.camera.pitch(Random.nextInt(60, 100));
         }
     }
 
@@ -75,19 +78,24 @@ public class Create extends Task {
                 //use onion on aggie and wait for dialogue window
                 System.out.println("Using Ingredient");
                 if(aggieWitch.inViewport()) {
-                    aggieWitch.interact("Use");
-                    Condition.wait(ctx.chat::canContinue, 100, 30);
+                    aggieWitch.interact("Use", "Aggie");
+                    Condition.wait(ctx.chat::canContinue, 250, 10);
                     ctx.chat.clickContinue(true);
+                    Condition.wait(() -> ctx.widgets.widget(193).component(2).visible(), 250,20);
+                    if(ctx.widgets.widget(193).component(2).visible()) {
+                        System.out.println("Dye Created.");
+                        dyesCreated++;
+                    }
                 } else {
                     System.out.println("Turning camera to Aggie.");
                     ctx.camera.turnTo(aggieWitch);
-                    ctx.movement.step(aggieWitch);
+                    ctx.camera.pitch(Random.nextInt(60, 100));
                 }
             } else {
                 randomOnion.interact("Use");
-                Condition.wait(() -> ctx.inventory.selectedItemIndex() != -1, 100, 30);
+                Condition.wait(() -> ctx.inventory.selectedItemIndex() != -1, 250, 25);
             }
-        } else { //open inventory tab
+        } else { //open inventory tabs
             ctx.game.tab(Game.Tab.INVENTORY);
         }
     }

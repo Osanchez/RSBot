@@ -80,9 +80,9 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
 
         Graphics2D g = (Graphics2D)graphics;
         g.setFont(TAHOMA);
-        g.setColor(new Color(255, 107, 107, 180));
+        g.setColor(new Color(0, 0, 0, 180));
         g.fillRect(200, 0, 170, 120);
-        g.setColor(new Color(255, 45, 45));
+        g.setColor(new Color(52, 52, 52));
         g.drawRect(200, 0, 170, 120);
         g.setColor(new Color(255, 255, 255));
         g.drawString("DyeMakerPro", 210, 20);
@@ -103,14 +103,17 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
                 }
             }
         }
+        updateDyesCreated();
     }
+
     @Override
     public void messaged(MessageEvent e) {
         if (e.text().contains("You pick an onion.")) {
             ++numOnionsPicked;
         }
-        else if (e.text().contains("filler text.")) { //TODO: get message for dyes created
-            ++numDyesCreated;
-        }
+    }
+
+    public void updateDyesCreated() {
+        numDyesCreated = createTask.dyesCreated;
     }
 }
