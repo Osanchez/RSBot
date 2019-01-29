@@ -64,6 +64,7 @@ public class Pick extends Task {
         } else { //if stairs are in the area and not viewable
             System.out.println("stairs not in viewport. Turning Camera.");
             ctx.camera.turnTo(stairs);
+            ctx.movement.step(stairs);
         }
     }
 
