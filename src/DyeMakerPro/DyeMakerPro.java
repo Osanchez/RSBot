@@ -113,7 +113,7 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
         }
     }
 
-    public void updateDyesCreated() {
+    private void updateDyesCreated() {
         numDyesCreated = createTask.dyesCreated;
     }
 }

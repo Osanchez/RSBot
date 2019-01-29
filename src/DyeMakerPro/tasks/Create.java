@@ -5,7 +5,6 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
 
-//TODO: Woad leaves are stackable so the bot needs to recognize that there are enough ingredients to create dyes
 //TODO: More work on opening the door to Aggie's
 
 
