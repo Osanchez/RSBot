@@ -102,7 +102,7 @@ public class BankOnions extends Task {
             GameObject depositBox = ctx.objects.select().id(depositBoxID).nearest().poll();
             if(depositBox.inViewport()) {
                 depositBox.interact("Deposit");
-                Condition.wait(() -> ctx.depositBox.opened(), 250, 20);
+                Condition.wait(ctx.depositBox::opened, 250, 20);
             } else {
                 ctx.camera.turnTo(depositBox);
                 ctx.movement.step(depositBox);
