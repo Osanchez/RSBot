@@ -80,8 +80,8 @@ public class Create extends Task {
                     aggieWitch.interact("Use", "Aggie");
                     Condition.wait(ctx.chat::canContinue, 250, 10);
                     ctx.chat.clickContinue(true);
-                    Condition.wait(() -> ctx.widgets.widget(193).component(2).visible(), 250,20);
-                    if(ctx.widgets.widget(193).component(2).visible()) {
+                    Condition.wait(() -> ctx.widgets.widget(createWidget).component(createComponent).visible(), 250,20);
+                    if(ctx.widgets.widget(createWidget).component(createComponent).visible()) {
                         System.out.println("Dye Created.");
                         dyesCreated++;
                     }

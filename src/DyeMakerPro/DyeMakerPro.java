@@ -36,7 +36,7 @@ public class DyeMakerPro extends PollingScript<ClientContext> implements PaintLi
         System.out.println("DyeMakerPro starting.");
         String userOptions[] = {"Collect Ingredients", "Create Dye"};
         String dyeOptions[] = {"Red Dye", "Yellow Dye", "Blue Dye"};
-        String taskChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or create dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
+        String taskChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or create dyes?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
         if (taskChoice.equals("Create Dye")) {
             dyeChoice = "" + JOptionPane.showInputDialog(null, "What color dye?", "DyeMakerPro", JOptionPane.PLAIN_MESSAGE, null, dyeOptions, dyeOptions[0]);
         }

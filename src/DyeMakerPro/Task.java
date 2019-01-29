@@ -12,6 +12,8 @@ public abstract class Task extends ClientAccessor {
 
     //magic numbers
     protected final static int goldRequired = 5;
+    protected final static int createWidget = 193;
+    protected final static int createComponent = 2;
 
     //animation ids
     protected final static int pickingAnimation = 827;
