@@ -1,6 +1,6 @@
-package DyeMakerPro.tasks;
+package DyeMaker.tasks;
 
-import DyeMakerPro.Task;
+import DyeMaker.Task;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;

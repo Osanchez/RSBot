@@ -1,4 +1,4 @@
-package DyeMakerPro;
+package DyeMaker;
 
 import org.powerbot.script.Area;
 import org.powerbot.script.Tile;
