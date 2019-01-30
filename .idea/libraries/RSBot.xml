@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="RSBot-7087">
+  <library name="RSBot">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/RSBot-7087.jar!/" />
+      <root url="jar://$PROJECT_DIR$/RSBot.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
