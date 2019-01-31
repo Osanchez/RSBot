@@ -1,6 +1,6 @@
 package DyeMaker.tasks;
 
-import DyeMaker.Task;
+import DyeMaker.DyeTask;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
@@ -8,7 +8,7 @@ import org.powerbot.script.rt4.*;
 //TODO: More work on opening the door to Aggie's
 
 
-public class Create extends Task {
+public class Create extends DyeTask {
 
     public Create(ClientContext ctx) {
         super(ctx);
@@ -39,7 +39,7 @@ public class Create extends Task {
         }
     }
 
-    //Used to keep track of current task in paint
+    //Used to keep track of current task in Paint
     @Override
     public String toString() {
         return "Creating Dyes";

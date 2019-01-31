@@ -1,13 +1,13 @@
 package DyeMaker.tasks;
 
-import DyeMaker.Task;
+import DyeMaker.DyeTask;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 
 import java.util.concurrent.Callable;
 
-public class Pick extends Task {
+public class Pick extends DyeTask {
 
     public Pick(ClientContext ctx) {
         super(ctx);
@@ -40,7 +40,7 @@ public class Pick extends Task {
         }
     }
 
-    //Used to keep track of current task in paint
+    //Used to keep track of current task in Paint
     @Override
     public String toString() {
         return "Picking Onions";

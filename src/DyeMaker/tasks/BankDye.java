@@ -1,6 +1,6 @@
 package DyeMaker.tasks;
 
-import DyeMaker.Task;
+import DyeMaker.DyeTask;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.Bank;
@@ -8,7 +8,7 @@ import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.Npc;
 
-public class BankDye extends Task {
+public class BankDye extends DyeTask {
 
     public BankDye(ClientContext ctx) {
         super(ctx);
@@ -54,7 +54,7 @@ public class BankDye extends Task {
         }
     }
 
-    //Used to keep track of current task in paint
+    //Used to keep track of current task in Paint
     @Override
     public String toString() {
         return "Banking Dyes";
