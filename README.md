@@ -46,3 +46,6 @@ No requirements, this is a easy money making method for f2p. You can collect oni
 # Todo:
 
 * Add ingredient collection for other dyes (Redberry, Woad leaf)
+
+## Screenshots
+https://i.imgur.com/Ta8aiM1.png
