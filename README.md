@@ -22,12 +22,13 @@ No requirements, this is a easy money making method for f2p. You can collect oni
 
 # Setup
 
-Collecting Onions
+*Collecting Onions*
 
 Start in Lumbridge bank
 Deposit entire inventory in bank to maximize inventory space
 Run script in fixed mode
-Creating Dyes
+
+*Creating Dyes*
 
 Start in Draynor Bank
 Deposit entire inventory to maximize inventory space
