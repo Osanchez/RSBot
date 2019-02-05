@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9678c91f-d1c7-4c89-9a70-86cb0c9044ea" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/DyeMaker/DyeMaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/DyeMaker/DyeMaker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/DyeMaker/Paint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/DyeMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/DyeMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/DyeTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/DyeTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/Paint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/Paint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerPaint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/tasks/BankDye.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/tasks/BankDye.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/tasks/BankOnions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/tasks/BankOnions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/tasks/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/tasks/Create.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DyeMaker/tasks/Pick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DyeMaker/tasks/Pick.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,25 +35,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="64" />
+          <entry key="java" value="68" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="64" />
+          <entry key="JAVA" value="68" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="13" />
-          <entry key="java" value="19333" />
-          <entry key="txt" value="621" />
+          <entry key="dummy" value="21" />
+          <entry key="java" value="24090" />
+          <entry key="txt" value="626" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="19333" />
-          <entry key="PLAIN_TEXT" value="634" />
+          <entry key="JAVA" value="24090" />
+          <entry key="PLAIN_TEXT" value="647" />
         </counts>
       </usages-collector>
     </session>
@@ -51,34 +61,47 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DyeMaker/Paint.java">
+        <entry file="file://$PROJECT_DIR$/src/DyeMaker/DyeMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+            <state relative-caret-position="833">
+              <caret line="49" column="43" lean-forward="true" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1912#1913#0" expanded="true" />
-                <element signature="e#1961#1962#0" expanded="true" />
-                <element signature="e#2008#2009#0" expanded="true" />
-                <element signature="e#2044#2045#0" expanded="true" />
+                <element signature="e#530#539#0" expanded="true" />
+                <element signature="e#2381#2382#0" expanded="true" />
+                <element signature="e#2437#2438#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java">
+        <entry file="file://$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="59" column="79" selection-start-line="59" selection-start-column="79" selection-end-line="59" selection-end-column="79" />
+            <state relative-caret-position="391">
+              <caret line="112" column="67" lean-forward="true" selection-start-line="112" selection-start-column="67" selection-end-line="112" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2576#2577#0" expanded="true" />
-                <element signature="e#2624#2625#0" expanded="true" />
-                <element signature="e#3002#3003#0" expanded="true" />
-                <element signature="e#3034#3035#0" expanded="true" />
-                <element signature="e#3150#3151#0" expanded="true" />
-                <element signature="e#3184#3185#0" expanded="true" />
+                <element signature="e#2395#2396#0" expanded="true" />
+                <element signature="e#2430#2431#0" expanded="true" />
+                <element signature="e#5068#5069#0" expanded="true" />
+                <element signature="e#5123#5124#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerPaint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1912#1913#0" expanded="true" />
+                <element signature="e#1961#1962#0" expanded="true" />
+                <element signature="e#2008#2009#0" expanded="true" />
+                <element signature="e#2044#2045#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,8 +157,10 @@
         <option value="$PROJECT_DIR$/src/DyeMaker/tasks/Create.java" />
         <option value="$PROJECT_DIR$/src/DyeMaker/DyeTask.java" />
         <option value="$PROJECT_DIR$/src/DyeMaker/Paint.java" />
-        <option value="$PROJECT_DIR$/src/DyeMaker/DyeMaker.java" />
         <option value="$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java" />
+        <option value="$PROJECT_DIR$/src/DyeMaker/ui/Paint.java" />
+        <option value="$PROJECT_DIR$/src/DyeMaker/DyeMaker.java" />
+        <option value="$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerGUI.java" />
       </list>
     </option>
   </component>
@@ -146,8 +171,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-133" />
-    <option name="y" value="-9" />
+    <option name="x" value="175" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -180,7 +205,7 @@
               <item name="RSBot" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="DyeMaker" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -193,7 +218,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549181751246" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549342085781" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/RSBot.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -219,7 +244,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test GUI">
+    <configuration name="Test GUI" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="DyeMaker.ui.DyeMakerGUI" />
+      <module name="RSBot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OldSchool RuneScape" type="JarApplication" factoryName="JAR Application">
       <option name="JAR_PATH" value="$USER_HOME$/jagexcache/jagexlauncher/bin/jagexappletviewer.jar" />
       <option name="VM_PARAMETERS" value="-Djava.search.path=out -Dcom.jagex.config=http://oldschool.runescape.com/l=en/jav_config.ws -javaagent:&quot;C:\Users\Omar\Desktop\RSBot\RSBot.jar&quot;" />
@@ -229,6 +261,10 @@
       <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files (x86)/Java/jre1.8.0_191" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Test GUI" />
+      <item itemvalue="JAR Application.OldSchool RuneScape" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -243,7 +279,7 @@
       <workItem from="1548323616976" duration="90703000" />
       <workItem from="1548816522556" duration="782000" />
       <workItem from="1548819072521" duration="14986000" />
-      <workItem from="1549172033067" duration="9211000" />
+      <workItem from="1549172033067" duration="32912000" />
     </task>
     <task id="LOCAL-00001" summary="restructured code">
       <created>1548487965349</created>
@@ -406,17 +442,24 @@
       <option name="project" value="LOCAL" />
       <updated>1549181572731</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="notes">
+      <created>1549181759069</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1549181759069</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115682000" />
+    <option name="totallyTimeSpent" value="139383000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -425,8 +468,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.20065077" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14642082" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -446,7 +489,7 @@
       <window_info anchor="right" id="Maven Projects" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -455,7 +498,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20065077" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20065077" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -498,7 +541,8 @@
     <MESSAGE value="created interface for abstraction" />
     <MESSAGE value="adjusted aggie door bounds and improved switch case for user settings" />
     <MESSAGE value="profit tracking for creating dyes" />
-    <option name="LAST_COMMIT_MESSAGE" value="profit tracking for creating dyes" />
+    <MESSAGE value="notes" />
+    <option name="LAST_COMMIT_MESSAGE" value="notes" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/DyeMakerPro/tasks/Climb.java" />
@@ -573,20 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DyeMaker/DyeTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="105" column="46" lean-forward="true" selection-start-line="105" selection-start-column="46" selection-end-line="105" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3129#3130#0" expanded="true" />
-            <element signature="e#3155#3156#0" expanded="true" />
-            <element signature="e#4260#4261#0" expanded="true" />
-            <element signature="e#4289#4290#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DyeMaker/tasks/Create.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
@@ -597,23 +627,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DyeMaker/DyeMaker.java">
+    <entry file="file://$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
+        <state relative-caret-position="704">
+          <caret line="127" column="52" lean-forward="true" selection-start-line="127" selection-start-column="52" selection-end-line="127" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#530#539#0" expanded="true" />
-            <element signature="e#2493#2494#0" expanded="true" />
-            <element signature="e#2549#2550#0" expanded="true" />
+            <element signature="e#2576#2577#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#3002#3003#0" expanded="true" />
+            <element signature="e#3034#3035#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
+            <element signature="e#3184#3185#0" expanded="true" />
+            <element signature="e#3299#3300#0" expanded="true" />
+            <element signature="e#3333#3334#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DyeMaker/Paint.java">
+    <entry file="file://$PROJECT_DIR$/src/DyeMaker/DyeMaker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+        <state relative-caret-position="833">
+          <caret line="49" column="43" lean-forward="true" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#530#539#0" expanded="true" />
+            <element signature="e#2381#2382#0" expanded="true" />
+            <element signature="e#2437#2438#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DyeMaker/DyeTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3129#3130#0" expanded="true" />
+            <element signature="e#3155#3156#0" expanded="true" />
+            <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4289#4290#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerPaint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1912#1913#0" expanded="true" />
@@ -624,18 +686,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DyeMaker/util/ProfitTracker.java">
+    <entry file="file://$PROJECT_DIR$/src/DyeMaker/ui/DyeMakerGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="59" column="79" selection-start-line="59" selection-start-column="79" selection-end-line="59" selection-end-column="79" />
+        <state relative-caret-position="391">
+          <caret line="112" column="67" lean-forward="true" selection-start-line="112" selection-start-column="67" selection-end-line="112" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2576#2577#0" expanded="true" />
-            <element signature="e#2624#2625#0" expanded="true" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3034#3035#0" expanded="true" />
-            <element signature="e#3150#3151#0" expanded="true" />
-            <element signature="e#3184#3185#0" expanded="true" />
+            <element signature="e#2395#2396#0" expanded="true" />
+            <element signature="e#2430#2431#0" expanded="true" />
+            <element signature="e#5068#5069#0" expanded="true" />
+            <element signature="e#5123#5124#0" expanded="true" />
           </folding>
         </state>
       </provider>
