@@ -5,9 +5,6 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
 
-//TODO: More work on opening the door to Aggie's
-
-
 public class Create extends DyeTask {
 
     public Create(ClientContext ctx) {
@@ -24,22 +21,26 @@ public class Create extends DyeTask {
 
     @Override
     public void execute() {
+        boolean doorClosed = aggieWitchHouseArea.contains(ctx.objects.select().id(closedDoorID).nearest().poll());
+
         if(!aggieWitchHouseArea.contains(ctx.players.local())) {
             System.out.println("Walking to Aggie's");
             walkToAggie();
-        } else if(aggieWitchHouseArea.contains(ctx.players.local())) {
-            boolean doorClosed = aggieWitchHouseArea.contains(ctx.objects.select().id(closedDoorID).nearest().poll());
-            if(doorClosed) {
-                System.out.println("Opening Door");
-                openDoor();
-            } else {
-                System.out.println("Creating Dyes");
-                createDyes();
-            }
         }
+
+        if(doorClosed) {
+            System.out.println("Opening Door");
+            openDoor();
+        }
+
+        if(aggieWitchHouseArea.contains(ctx.players.local()) && !doorClosed) {
+            System.out.println("Creating Dyes");
+            createDyes();
+        }
+
     }
 
-    //Used to keep track of current task in Paint
+    //Used to keep track of current task in DyeMakerPaint
     @Override
     public String toString() {
         return "Creating Dyes";
@@ -54,20 +55,26 @@ public class Create extends DyeTask {
         GameObject closedDoor = ctx.objects.select().id(closedDoorID).nearest().poll();
         closedDoor.bounds(closedDoorBounds);
 
-        if(closedDoor.inViewport()) {
-            System.out.println("Opening door.");
-            if(ctx.inventory.selectedItemIndex() == -1) { //ensures that no item is selected when interacting with door
-                closedDoor.interact("Open", "Door");
-            } else { //if item is selected unselect the item
-                closedDoor.interact("Use", "Door");
-            }
-        } else {
+        if(!closedDoor.inViewport()) {
             System.out.println("Turning camera to door.");
             ctx.camera.turnTo(closedDoor);
             ctx.camera.pitch(Random.nextInt(60, 100));
         }
+
+        if(ctx.inventory.selectedItemIndex() != -1) {
+            closedDoor.interact("Use", "Door");
+        }
+
+        if(ctx.inventory.selectedItemIndex() == -1) {
+            System.out.println("Opening door.");
+            closedDoor.interact("Open", "Door");
+            Condition.wait(() -> !aggieWitchHouseArea.contains(ctx.objects.select().id(closedDoorID).nearest().poll()), 250, 20);
+        }
+
+
     }
 
+    //TODO: optimize
     private void createDyes() {
         Npc aggieWitch = ctx.npcs.select().id(aggieWitchNPC).nearest().poll();
         Item randomOnion = ctx.inventory.select().id(ingredientItemID).shuffle().poll(); //selects a random onion from inventory
@@ -83,7 +90,7 @@ public class Create extends DyeTask {
                     Condition.wait(() -> ctx.widgets.widget(createWidget).component(createComponent).visible(), 250,20);
                     if(ctx.widgets.widget(createWidget).component(createComponent).visible()) {
                         System.out.println("Dye Created.");
-                        dyesCreated++;
+                        updateDyesCreated();
                     }
                 } else {
                     System.out.println("Turning camera to Aggie.");

@@ -18,7 +18,7 @@ public abstract class DyeTask extends ClientAccessor implements Task {
     protected final static int pickingAnimation = 827;
 
     //bounds
-    protected final static int[] closedDoorBounds = {116, 132, -232, 0, 4, 132}; //was having some issues opening the door so had to set model bounds
+    protected final static int[] closedDoorBounds = {116, 132, -152, -100, 48, 88}; //was having some issues opening the door so had to set model bounds
 
     //object ids
     protected final static int gateClosedObjectID = 12987;
@@ -96,6 +96,8 @@ public abstract class DyeTask extends ClientAccessor implements Task {
         super(ctx);
     }
 
+    //TODO: Use Enums for configuration instead
+
     //used to set correct variables
     void setUserOptions(String dyeOption) {
         switch (dyeOption) {
@@ -111,12 +113,21 @@ public abstract class DyeTask extends ClientAccessor implements Task {
                 ingredientObjectID = onionObjectID;
                 amountRequired = 2;
                 break;
-            default:                                     //blue dye
+            case "Blue Dye":   //blue dye
                 dyeID = bluedyeID;
                 ingredientItemID = woadLeafID;
                 ingredientObjectID = woadLeafObjectID;
                 amountRequired = 2;
                 break;
+            default:
+                System.out.println("Incorrect dye color selected. Stopping script.");
+                ctx.controller.stop();
+                break;
         }
     }
+
+    protected void updateDyesCreated() {
+        dyesCreated++;
+    }
+
 }

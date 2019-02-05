@@ -1,4 +1,4 @@
-package DyeMaker;
+package DyeMaker.ui;
 
 import org.powerbot.script.ClientContext;
 import org.powerbot.script.MessageEvent;
@@ -7,19 +7,21 @@ import org.powerbot.script.PaintListener;
 
 import java.awt.*;
 
-public class Paint implements PaintListener, MessageListener {
+public class DyeMakerPaint implements PaintListener, MessageListener {
 
     private ClientContext ctx;
+    private int currentProfit = 0;
+    private int profitHour = 0;
     private int numOnionsPicked = 0;
     private int numDyesCreated = 0;
     private String taskName = "";
 
     private static final Font TAHOMA = new Font("Tahoma", Font.PLAIN, 12);
 
-    public Paint(ClientContext ctx) {
+    public DyeMakerPaint(ClientContext ctx) {
+        System.out.println("DyeMakerPaint Created.");
         this.ctx = ctx;
         this.ctx.dispatcher.add(this);
-        System.out.println("Paint Created.");
     }
 
     @Override
@@ -48,7 +50,7 @@ public class Paint implements PaintListener, MessageListener {
         g.drawString("Run time: " + String.format("%02d:%02d:%02d", hours, minutes, seconds), 210, 50);
         g.drawString("DyeTask: " + taskName,210, 70);
         g.drawString("Collected/Created: " + numOnionsPicked + "/" + numDyesCreated, 210, 90);
-        g.drawString("Profit:", 210, 110);
+        g.drawString("Profit: " + currentProfit + " (" + profitHour + ")", 210, 110);
     }
 
 
@@ -60,5 +62,11 @@ public class Paint implements PaintListener, MessageListener {
     public void updateTaskName(String name) {
         this.taskName = name;
     }
+
+    public void updateProfit(int currentProfit, int profitHour) {
+        this.currentProfit = currentProfit;
+        this.profitHour = profitHour;
+    }
+
 
 }

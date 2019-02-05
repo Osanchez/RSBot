@@ -47,7 +47,7 @@ public class BankOnions extends DyeTask {
         }
     }
 
-    //Used to keep track of current task in Paint
+    //Used to keep track of current task in DyeMakerPaint
     @Override
     public String toString() {
         return "Banking Onions";

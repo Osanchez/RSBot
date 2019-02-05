@@ -2,6 +2,9 @@ package DyeMaker;
 
 import DyeMaker.tasks.*;
 
+import DyeMaker.ui.DyeMakerGUI;
+import DyeMaker.ui.DyeMakerPaint;
+import DyeMaker.util.ProfitTracker;
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
 
@@ -25,11 +28,17 @@ public class DyeMaker extends PollingScript<ClientContext>  {
     private DyeTask bankDyeDyeTask;
 
     private String dyeChoice;
-    private Paint paint;
+    private DyeMakerPaint dyeMakerPaint;
+    private ProfitTracker profitTracker;
+
 
     @Override
     public void start() {
         System.out.println("DyeMaker starting.");
+
+        //initialize new GUI
+        DyeMakerGUI gui = new DyeMakerGUI();
+
         String userOptions[] = {"Collect Ingredients", "Create Dye"};
         String dyeOptions[] = {"Red Dye", "Yellow Dye", "Blue Dye"};
         String taskChoice = "" + JOptionPane.showInputDialog(null, "Collect onions or create dyes?", "DyeMaker", JOptionPane.PLAIN_MESSAGE, null, userOptions, userOptions[0]);
@@ -37,8 +46,11 @@ public class DyeMaker extends PollingScript<ClientContext>  {
             dyeChoice = "" + JOptionPane.showInputDialog(null, "What color dye?", "DyeMaker", JOptionPane.PLAIN_MESSAGE, null, dyeOptions, dyeOptions[0]);
         }
 
-        //initialize the paint
-        this.paint = new Paint(ctx);
+        //initialize the dyeMakerPaint
+        this.dyeMakerPaint = new DyeMakerPaint(ctx);
+
+        //initialize profit tracker
+        this.profitTracker = new ProfitTracker();
 
         if (taskChoice.equals("Collect Ingredients")) { //collect ingredient
             this.pickDyeTask = new Pick(ctx);
@@ -70,15 +82,17 @@ public class DyeMaker extends PollingScript<ClientContext>  {
         if (ctx.players.local().animation() == -1) {
             for (DyeTask dyeTask : dyeTaskList) {
                 if (dyeTask.activate()) {
-                    paint.updateTaskName(dyeTask.toString());
+                    dyeMakerPaint.updateTaskName(dyeTask.toString());
                     Condition.sleep(Random.nextInt(100,1200)); //random sleep between tasks
                     dyeTask.execute();
-                    if(dyeTask.toString().equals("Creating Dyes")) {
-                        paint.updateDyesCreated(createDyeTask.dyesCreated);
-                    }
                     break;
                 }
             }
         }
+
+        //update values for dyeMakerPaint TODO: profit tracking for collecting ingredients
+        profitTracker.addEarnedItem(createDyeTask.dyeID, createDyeTask.dyesCreated);
+        dyeMakerPaint.updateProfit(profitTracker.getTotalEarnedCoins(), profitTracker.getTotalEarnedPerHour());
+        dyeMakerPaint.updateDyesCreated(createDyeTask.dyesCreated);
     }
 }
