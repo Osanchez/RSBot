@@ -1,21 +1,25 @@
 package DyeMaker.tasks;
 
 import DyeMaker.DyeTask;
+import DyeMaker.Dyes;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
 
 public class Create extends DyeTask {
 
-    public Create(ClientContext ctx) {
-        super(ctx);
+    public Dyes options;
+
+    public Create(ClientContext ctx, Dyes options) {
+        super(ctx, options);
+        this.options = options;
     }
 
     @Override
     public boolean activate() {
-        return (ctx.inventory.select().id(ingredientItemID).count() >= amountRequired |
-                ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired &&
-                ctx.inventory.select().id(dyeID).count() < 26) &&
+        return (ctx.inventory.select().id(options.getingredientItemId()).count() >= options.getAmountRequired() |
+                ctx.inventory.select().id(options.getingredientItemId()).count(true) >= options.getAmountRequired() &&
+                ctx.inventory.select().id(options.getDyeId()).count() < 26) &&
                 ctx.inventory.select().id(goldID).count(true) >= goldRequired;
     }
 
@@ -77,7 +81,7 @@ public class Create extends DyeTask {
     //TODO: optimize
     private void createDyes() {
         Npc aggieWitch = ctx.npcs.select().id(aggieWitchNPC).nearest().poll();
-        Item randomOnion = ctx.inventory.select().id(ingredientItemID).shuffle().poll(); //selects a random onion from inventory
+        Item randomOnion = ctx.inventory.select().id(options.getingredientItemId()).shuffle().poll(); //selects a random onion from inventory
 
         if (ctx.game.tab() == Game.Tab.INVENTORY) { //checks to see if inventory tab is open
             if (ctx.inventory.selectedItemIndex() != -1) {

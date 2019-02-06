@@ -6,6 +6,9 @@ import org.powerbot.script.rt4.ClientContext;
 
 public abstract class DyeTask extends ClientAccessor implements Task {
 
+    //user options
+    protected Dyes options;
+
     //counter
     protected int dyesCreated = 0;
 
@@ -24,21 +27,9 @@ public abstract class DyeTask extends ClientAccessor implements Task {
     protected final static int gateClosedObjectID = 12987;
     protected final static int depositBoxID = 6948; //interact "Deposit"
     protected final static int closedDoorID = 1535;
-    protected final static int onionObjectID = 3366;
-    protected final static int redBerryObjectID = 1234; //fill in
-    protected final static int woadLeafObjectID = 5678; //fill in
-
 
     //item ids
-    protected final static int onionID = 1957;
-    protected final static int redBerryID = 1951;
-    protected final static int woadLeafID = 1793;
     protected final static int goldID = 995;
-
-    //dyes
-    protected final static int yellowdyeID = 1765;
-    protected final static int bluedyeID = 1767;
-    protected final static int reddyeID = 1763;
 
     //nps ids
     protected final static int aggieWitchNPC = 4284;
@@ -86,44 +77,9 @@ public abstract class DyeTask extends ClientAccessor implements Task {
             new Tile(3083, 3256, 0)
     );
 
-    //selected user options
-    protected int dyeID;
-    protected int ingredientItemID;
-    protected int ingredientObjectID;
-    protected int amountRequired;
-
-    public DyeTask(ClientContext ctx) {
+    public DyeTask(ClientContext ctx, Dyes options) {
         super(ctx);
-    }
-
-    //TODO: Use Enums for configuration instead
-
-    //used to set correct variables
-    void setUserOptions(String dyeOption) {
-        switch (dyeOption) {
-            case "Red Dye":            //red dye
-                dyeID = reddyeID;
-                ingredientItemID = redBerryID;
-                ingredientObjectID = redBerryObjectID;
-                amountRequired = 3;
-                break;
-            case "Yellow Dye":  //yellow dye
-                dyeID = yellowdyeID;
-                ingredientItemID = onionID;
-                ingredientObjectID = onionObjectID;
-                amountRequired = 2;
-                break;
-            case "Blue Dye":   //blue dye
-                dyeID = bluedyeID;
-                ingredientItemID = woadLeafID;
-                ingredientObjectID = woadLeafObjectID;
-                amountRequired = 2;
-                break;
-            default:
-                System.out.println("Incorrect dye color selected. Stopping script.");
-                ctx.controller.stop();
-                break;
-        }
+        this.options = options;
     }
 
     protected void updateDyesCreated() {

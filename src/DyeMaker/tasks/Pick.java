@@ -1,6 +1,7 @@
 package DyeMaker.tasks;
 
 import DyeMaker.DyeTask;
+import DyeMaker.Dyes;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -9,8 +10,11 @@ import java.util.concurrent.Callable;
 
 public class Pick extends DyeTask {
 
-    public Pick(ClientContext ctx) {
-        super(ctx);
+    public Dyes options;
+
+    public Pick(ClientContext ctx, Dyes options) {
+        super(ctx, options);
+        this.options = options;
     }
 
     @Override
@@ -88,7 +92,7 @@ public class Pick extends DyeTask {
 
     //Pick onions from farm
     private void pickOnions() {
-        GameObject onionToPick = ctx.objects.select().id(onionObjectID).nearest().poll();
+        GameObject onionToPick = ctx.objects.select().id(options.getingredientItemId()).nearest().poll();
         if(onionToPick.inViewport()) {
             onionToPick.interact("Pick");
             Condition.wait(() -> {

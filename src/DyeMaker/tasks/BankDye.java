@@ -1,6 +1,7 @@
 package DyeMaker.tasks;
 
 import DyeMaker.DyeTask;
+import DyeMaker.Dyes;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.Bank;
@@ -9,15 +10,18 @@ import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.Npc;
 
 public class BankDye extends DyeTask {
+    public Dyes options;
 
-    public BankDye(ClientContext ctx) {
-        super(ctx);
+    public BankDye(ClientContext ctx, Dyes options) {
+        super(ctx, options);
+        this.options = options;
+
     }
 
     @Override
     public boolean activate() {
-        return (ctx.inventory.select().id(ingredientItemID).count() < amountRequired | ctx.inventory.select().id(goldID).count(true) < goldRequired |
-                ctx.inventory.select().id(dyeID).count() >= 26);
+        return (ctx.inventory.select().id(options.getingredientItemId()).count() < options.getAmountRequired() | ctx.inventory.select().id(goldID).count(true) < goldRequired |
+                ctx.inventory.select().id(options.getDyeId()).count() >= 26);
     }
 
     @Override
@@ -85,12 +89,12 @@ public class BankDye extends DyeTask {
     }
 
     private void depositDyes() {
-        ctx.bank.deposit(dyeID, Bank.Amount.ALL);
-        Condition.wait(() -> ctx.inventory.select().id(dyeID).count() == 0, 100, 50);
+        ctx.bank.deposit(options.getDyeId(), Bank.Amount.ALL);
+        Condition.wait(() -> ctx.inventory.select().id(options.getDyeId()).count() == 0, 100, 50);
     }
     private void withdrawalIngredient() {
-        ctx.bank.withdraw(ingredientItemID, 28);
-        Condition.wait(() -> ctx.inventory.select().id(ingredientItemID).count() > 0, 100, 20);
+        ctx.bank.withdraw(options.getingredientItemId(), 28);
+        Condition.wait(() -> ctx.inventory.select().id(options.getingredientItemId()).count() > 0, 100, 20);
         ctx.bank.close();
     }
 
@@ -99,9 +103,9 @@ public class BankDye extends DyeTask {
     }
 
     private boolean hasIngredients() {
-        return (ctx.bank.select().id(ingredientItemID).count() >= amountRequired |
-                ctx.bank.select().id(ingredientItemID).count(true) >= amountRequired) |
-                (ctx.inventory.select().id(ingredientItemID).count() >= amountRequired |
-                ctx.inventory.select().id(ingredientItemID).count(true) >= amountRequired);
+        return (ctx.bank.select().id(options.getingredientItemId()).count() >= options.getAmountRequired() |
+                ctx.bank.select().id(options.getingredientItemId()).count(true) >= options.getAmountRequired()) |
+                (ctx.inventory.select().id(options.getingredientItemId()).count() >= options.getAmountRequired() |
+                ctx.inventory.select().id(options.getingredientItemId()).count(true) >= options.getAmountRequired());
     }
 }

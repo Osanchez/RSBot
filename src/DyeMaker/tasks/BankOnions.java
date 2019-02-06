@@ -1,6 +1,7 @@
 package DyeMaker.tasks;
 
 import DyeMaker.DyeTask;
+import DyeMaker.Dyes;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -8,8 +9,8 @@ import org.powerbot.script.rt4.GameObject;
 public class BankOnions extends DyeTask {
 
 
-    public BankOnions(ClientContext ctx) {
-        super(ctx);
+    public BankOnions(ClientContext ctx, Dyes options) {
+        super(ctx, options);
     }
 
     @Override
