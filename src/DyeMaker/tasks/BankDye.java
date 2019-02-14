@@ -73,7 +73,7 @@ public class BankDye extends DyeTask {
             System.out.println("Opening door.");
             if(ctx.inventory.selectedItemIndex() == -1) { //ensures that no item is selected when interacting with door
                 closedDoor.interact("Open", "Door");
-            } else { //if item is selected unselect the item
+            } else { //if item is selected deselect the item
                 closedDoor.interact("Use", "Door");
             }
         } else {

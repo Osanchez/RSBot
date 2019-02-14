@@ -47,12 +47,12 @@ public class DyeMaker extends PollingScript<ClientContext>  {
 
         //----- update paint -----
 
-        //update current task
+        //update current task on paint
         dyeMakerPaint.updateTaskName(taskManager.getCurrentTask());
 
         //update values for dyeMakerPaint
+        dyeMakerPaint.updateDyesCreated(taskManager.createTask.dyesCreated);
         profitTracker.addEarnedItem(taskManager.options.getDyeId(), taskManager.createTask.dyesCreated);
         dyeMakerPaint.updateProfit(profitTracker.getTotalEarnedCoins(), profitTracker.getTotalEarnedPerHour());
-        dyeMakerPaint.updateDyesCreated(taskManager.createTask.dyesCreated);
     }
 }
