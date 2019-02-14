@@ -39,6 +39,8 @@ No requirements, this is a easy money making method for f2p. You can collect oni
 # Currently Working On:
 
 * optimizing code (removing redundant code, making necessary conditions)
+
+# Completed
 * Better paint
 * Better GUI
  
